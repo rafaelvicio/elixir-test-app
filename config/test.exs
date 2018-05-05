@@ -12,8 +12,7 @@ config :logger, level: :warn
 # Configure your database
 config :elixir_test_app, ElixirTestApp.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "elixir_test_app_test",
-  hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+  url: [scheme: "https", host: "https://rafaelvicio-elixir.herokuapp.com/", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  ssl: true
